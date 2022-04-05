@@ -4,7 +4,7 @@ import { ListMovimientos } from "../List/ListMovimientos";
 import { Button } from "react-native-elements";
 export const Movimientos = ({navigation}) => {
   const [suma, setSuma] = React.useState();
-  let color = "red";
+  const [color, setColor] = React.useState();
   global.calcularSaldo = () => {
     let totalSaldo = 0;
     for (let i = 0; i < global.transacciones.length; i++) {
@@ -14,20 +14,19 @@ export const Movimientos = ({navigation}) => {
       } else {
         totalSaldo += item.monto;
       }
+      if (totalSaldo < 0) {
+        setColor("#FF774F");
+      } else {
+        setColor("#9BFF6D");
+      }
     }
-    validation();
+    
     return totalSaldo;
   };
   React.useEffect(() => {
     setSuma(global.calcularSaldo());
   }, []);
-  let validation = () => {
-    if (suma < 0) {
-      color = "red";
-    } else {
-      color = "green";
-    }
-  };
+
   return (
     <View style={styles.container}>
       <View
@@ -45,7 +44,7 @@ export const Movimientos = ({navigation}) => {
           <Text style={styles.title}> Total Saldo: </Text>
         </View>
         <View style={{ position: "relative", left: 100 }}>
-          <Text style={{ color: color, fontSize: 30 }}> {suma}</Text>
+          <Text style={{ color: color, fontSize: 30, fontWeight: "bold"}}> {suma}</Text>
         </View>
       </View>
       <View

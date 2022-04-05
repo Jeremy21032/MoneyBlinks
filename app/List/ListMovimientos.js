@@ -14,10 +14,10 @@ export const ListMovimientos = ({ person }) => {
   let color;
   if (person.tipo == "R") {
     icono = "plus";
-    color = "#B4FF4F"
-  }else{
-    icono="minus";
-    color = "#FF544F"
+    color = "#B4FF4F";
+  } else {
+    icono = "minus";
+    color = "#FF544F";
   }
   return (
     <ListItem
@@ -43,7 +43,7 @@ export const ListMovimientos = ({ person }) => {
           </ListItem.Title>
           <ListItem.Content style={{ flexDirection: "column" }}>
             <ListItem.Title
-              style={{ color: "#0b57a5", fontWeight: "bold", paddingBottom: 5,  }}
+              style={{ color: "#0b57a5", fontWeight: "bold", paddingBottom: 5 }}
             >
               {person.nombre}
             </ListItem.Title>
@@ -56,18 +56,22 @@ export const ListMovimientos = ({ person }) => {
 
         <ListItem.Content>
           <ListItem.Content
-            style={{ flexDirection: "column", alignItems: "center", position: "relative", left: 70}}
+            style={{
+              flexDirection: "column",
+              alignItems: "center",
+              position: "relative",
+              left: 70,
+            }}
           >
             <ListItem.Title
               style={{
                 color: "#0B2460",
-     
+
                 fontSize: 25,
               }}
             >
-
-              <Icon name={icono} type="font-awesome" color={color} size={15}/>
-              {" "}{person.monto}
+              <Icon name={icono} type="font-awesome" color={color} size={15} />{" "}
+              {person.monto}
             </ListItem.Title>
 
             <ListItem.Title

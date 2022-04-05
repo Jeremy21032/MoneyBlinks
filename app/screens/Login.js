@@ -70,9 +70,7 @@ export const Login = ({navigation}) => {
               marginHorizontal: 50,
               marginVertical: 20,
             }}
-            onPress={() => {
-              navigation.navigate("MOV")
-            }}
+            onPress={() => {  navigation.navigate("VERIFICAR");}}
           />
           <View style={{ padding: 20 }}>
             <Text h4 style={[styles.title, { color: "lightgray" }]}>
