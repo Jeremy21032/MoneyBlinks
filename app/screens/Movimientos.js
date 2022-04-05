@@ -1,13 +1,15 @@
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList, ScrollView } from "react-native";
 import React from "react";
 import { ListMovimientos } from "../List/ListMovimientos";
 import { Button } from "react-native-elements";
-export const Movimientos = ({navigation}) => {
+export const Movimientos = ({ navigation }) => {
   const [suma, setSuma] = React.useState();
   const [color, setColor] = React.useState();
+  const [size, setSize] = React.useState();
   global.calcularSaldo = () => {
     let totalSaldo = 0;
     for (let i = 0; i < global.transacciones.length; i++) {
+      setSize(global.transacciones.length);
       let item = global.transacciones[i];
       if (item.tipo == "E") {
         totalSaldo -= item.monto;
@@ -17,10 +19,10 @@ export const Movimientos = ({navigation}) => {
       if (totalSaldo < 0) {
         setColor("#FF774F");
       } else {
-        setColor("#9BFF6D");
+        setColor("#EA8607");
       }
     }
-    
+
     return totalSaldo;
   };
   React.useEffect(() => {
@@ -40,16 +42,22 @@ export const Movimientos = ({navigation}) => {
           backgroundColor: "white",
         }}
       >
-        <View style={{ justifyContent: "flex-start", paddingLeft: 30 }}>
-          <Text style={styles.title}> Total Saldo: </Text>
+        <View style={{ justifyContent: "flex-start" }}>
+          <Text Text style={[styles.title, { fontSize: 30 }]}>
+            {" "}
+            Saldo disponible:{" "}
+          </Text>
         </View>
-        <View style={{ position: "relative", left: 100 }}>
-          <Text style={{ color: color, fontSize: 30, fontWeight: "bold"}}> {suma}</Text>
+        <View style={{ position: "relative", left: 75 }}>
+          <Text style={{ color: color, fontSize: 30, fontWeight: "bold" }}>
+            {" "}
+            {suma}
+          </Text>
         </View>
       </View>
       <View
         style={{
-          justifyContent: "flex-start",
+          flexDirection: "row",
           paddingBottom: 5,
           marginBottom: 10,
           borderColor: "#F5F6FA",
@@ -59,37 +67,46 @@ export const Movimientos = ({navigation}) => {
           justifyContent: "center",
           paddingLeft: 10,
         }}
-      >
-        <Text style={styles.title}> Movimientos: </Text>
-      </View>
-      <View style={{ alignItems: "center" }}>
-        <FlatList
-          data={global.transacciones}
-          style={{ paddingBottom: 30 }}
-          renderItem={({ item }) => {
-            return <ListMovimientos person={item} />;
-          }}
-          keyExtractor={(item) => item.id}
-        />
-
+      > 
+        <View style={{position:"relative",right: 55}}>
+        <Text style={[styles.title, { fontSize: 30,}]}> Movimientos: </Text>
+        </View>
         <View>
-          <Button
-            title="Regresar"
-            buttonStyle={{
-              backgroundColor: "#ea8a3d",
-              borderRadius: 20,
-            }}
-            containerStyle={{
-              width: 200,
-              marginHorizontal: 50,
-              marginVertical: 20,
-            }}
-            onPress={() => {
-              navigation.goBack();
-            }}
-          />
+        <Text style={{ color: "#ea8a3d", fontSize: 30,}}>
+          {size}
+        </Text>
         </View>
       </View>
+      <ScrollView>
+        <View style={{ alignItems: "center" }}>
+          <FlatList
+            data={global.transacciones}
+            style={{ paddingBottom: 30 }}
+            renderItem={({ item }) => {
+              return <ListMovimientos person={item} />;
+            }}
+            keyExtractor={(item) => item.id}
+          />
+
+          <View>
+            <Button
+              title="Regresar"
+              buttonStyle={{
+                backgroundColor: "#ea8a3d",
+                borderRadius: 20,
+              }}
+              containerStyle={{
+                width: 200,
+                marginHorizontal: 50,
+                marginVertical: 20,
+              }}
+              onPress={() => {
+                navigation.goBack();
+              }}
+            />
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -99,7 +116,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 30,
     color: "#ea8a3d",
   },
 });
