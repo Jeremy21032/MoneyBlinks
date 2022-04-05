@@ -1,11 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, FlatList} from "react-native";
 import React from "react";
-
+import { ListMovimientos } from "../List/ListMovimientos";
 export const Movimientos = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}> Movimientos</Text>
-      <StatusBar style="auto" />
+      <FlatList
+        data={global.transacciones}
+        style={{ paddingBottom: 25 }}
+        renderItem={({ item }) => {
+          return <ListMovimientos person={item} />;
+        }}
+        keyExtractor={(item) => item.id}
+      />
     </View>
   );
 };

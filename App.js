@@ -7,7 +7,6 @@ import {Login} from './app/screens/Login'
 import {Movimientos} from './app/screens/Movimientos'
 const StackNav = createStackNavigator();
 
-<<<<<<< HEAD
 function LoginNav() {
   return (
     <StackNav.Navigator initialRouteName="LOGIN">
@@ -17,7 +16,7 @@ function LoginNav() {
         options={{ headerShown: false }}
       ></StackNav.Screen>
       <StackNav.Screen
-        name="Movimientos"
+        name="MOV"
         component={Movimientos}
         options={{ headerShown: false }}
       ></StackNav.Screen>
@@ -25,7 +24,6 @@ function LoginNav() {
     
   );
 }
-=======
 
 global.transacciones=[
 	{ monto:100.0, tipo: "E", fecha: "05/04/2022", hora: "09:23", codigo:"ABCDS", nombre: "Juan Perez", id: "1714616123" },
@@ -33,7 +31,6 @@ global.transacciones=[
 	{ monto:40.0, tipo: "E", fecha: "05/04/2022", hora: "13:45", codigo:"CDASF", nombre: "Rosa Beltrán", id: "0976123123" },
 ]
 
->>>>>>> origin/development
 export default function App() {
   return (
     <NavigationContainer>
