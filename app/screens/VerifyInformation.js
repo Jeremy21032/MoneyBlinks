@@ -5,7 +5,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { getData } from "../services/DataTransaction";
 
 export const VerifyInformation = ({ navigation }) => {
-  //CURP: código alfanumérico de identificación que consta de 18 dígitos
+  //code: código alfanumérico de identificación que consta de 18 dígitos
   const [curp, setCurp] = React.useState(null);
   const [text, setText] = React.useState(null);
   const [show, setShow] = React.useState(false);
@@ -16,14 +16,25 @@ export const VerifyInformation = ({ navigation }) => {
   const [image, setImage] = React.useState(null);
 
   const validateCURP = () => {
-    let arreglo = getData(curp);
-    setName(arreglo[1]);
-    setId(arreglo[0]);
-    setValor(arreglo[4]);
-    setCarga(arreglo[3]);
-    setImage(arreglo[2]);
-    if (curp != null && curp != " ") {
-      setShow(true);
+    if (
+      curp != null ||
+      curp == "ABCDS" ||
+      curp == "VFSSS" ||
+      curp == "CDASF" ||
+      curp == "JML952" ||
+      curp == "DYS120"
+    ) {
+      let arreglo = getData(curp);
+      setName(arreglo[1]);
+      setId(arreglo[0]);
+      setValor(arreglo[4]);
+      setCarga(arreglo[3]);
+      setImage(arreglo[2]);
+      setShow(!show);
+      setText("");
+    } else {      
+      setText("El código es incorrecto.");
+      setShow(show);
     }
   };
   let content = (
@@ -97,11 +108,6 @@ export const VerifyInformation = ({ navigation }) => {
           maxLength={40}
         />
       </View>
-
-      <Text h5 style={{ color: "red" }}>
-        {"\n"}
-        {text}
-      </Text>
       <Button
         title="APLICAR"
         buttonStyle={{
@@ -119,9 +125,7 @@ export const VerifyInformation = ({ navigation }) => {
           marginHorizontal: 50,
           marginVertical: 20,
         }}
-        onPress={() => {
-          validateCURP();
-        }}
+        onPress={() => {}}
       />
     </View>
   );
@@ -154,6 +158,8 @@ export const VerifyInformation = ({ navigation }) => {
               Revisa que esté correcto, puedes corregirlo si es necesario.
             </Text>
           </View>
+          <Text style={{ color: "red" }}>{text}</Text>
+
           <Button
             title="Verificar"
             buttonStyle={{
@@ -171,9 +177,11 @@ export const VerifyInformation = ({ navigation }) => {
               marginHorizontal: 50,
               marginVertical: 20,
             }}
-            onPress={() => {}}
+            onPress={() => {
+              validateCURP();
+            }}
           />
-          <View>{show == true ? content : <></>}</View>
+          <View>{show != true ? content : <View></View>}</View>
         </View>
       </ScrollView>
     </View>
