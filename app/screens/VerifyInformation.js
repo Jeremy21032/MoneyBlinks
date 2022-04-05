@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Alert, Dimensions } from "react-native";
-import { Button, Text,Input } from "react-native-elements";
+import { Button, Text, Input, Image } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
 
 export const VerifyInformation = ({ navigation }) => {
@@ -26,130 +26,145 @@ export const VerifyInformation = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-        <ScrollView>
-      <View style={styles.view2}>
+        <View style={{marginTop:40}}>
         <Text style={styles.titleStyle}> VERIFICA LOS DATOS </Text>
-        <View style={styles.containerInput}>
-          <View>
-            <Text style={styles.text}> Código de Transacción: </Text>
-          </View>
-          <Input
-            placeholder="Primer nombre"
-            style={styles.input}
-            value={curp}
-            onChangeText={(e) => {
-              if (e != null) {
-                if (onlyNumbers(e)) {
-                  setCurp(e);
-                }
-              } else {
-                setCurp("");
-              }
-            }}
-            maxLength={40}
-          />
-        </View>
-        <View style={{marginBottom:10}}>
-        <Text style={styles.textStyle}>
-          Revisa que esté correcto, puedes corregirlo si es necesario.
-        </Text>
 
         </View>
-   
-        <View style={styles.containerInput}>
-          <View>
-            <Text style={styles.text}>Nombre: </Text>
-          </View>
-          <Input
-            placeholder="nombre completo"
-            style={styles.input}
-            value={curp}
-            onChangeText={(e) => {
-              if (e != null) {
-                if (onlyNumbers(e)) {
-                  setCurp(e);
+    
+      <ScrollView>
+        <View style={styles.view2}>
+          
+          <View style={styles.containerInput}>
+            <View>
+              <Text style={styles.text}> Código de Transacción: </Text>
+            </View>
+            <Input
+              placeholder="Ingrese el código"
+              style={styles.input}
+              value={curp}
+              onChangeText={(e) => {
+                if (e != null) {
+                  if (onlyNumbers(e)) {
+                    setCurp(e);
+                  }
+                } else {
+                  setCurp("");
                 }
-              } else {
-                setCurp("");
-              }
+              }}
+              maxLength={40}
+            />
+          </View>
+          <View style={{ marginBottom: 15 }}>
+            <Text style={styles.textStyle}>
+              Revisa que esté correcto, puedes corregirlo si es necesario.
+            </Text>
+          </View>
+          <View style={{alignItems:'center', marginVertical:20}}>
+          <Image
+            source={{
+              uri:"https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80"
+              ,
             }}
-            maxLength={40}
+            style={{ width: 120, height: 120, borderRadius: 100 }}
+          />
+
+
+          </View>
+        
+          <View style={styles.containerInput}>
+            <View>
+              <Text style={styles.text}>Nombre: </Text>
+            </View>
+            <Input
+              placeholder="nombre completo"
+              style={styles.input}
+              value={curp}
+              onChangeText={(e) => {
+                if (e != null) {
+                  if (onlyNumbers(e)) {
+                    setCurp(e);
+                  }
+                } else {
+                  setCurp("");
+                }
+              }}
+              maxLength={40}
+            />
+          </View>
+          <View style={styles.containerInput}>
+            <View>
+              <Text style={styles.text}> Identificación: </Text>
+            </View>
+            <Input
+              placeholder="17XXXXXXXX"
+              style={styles.input}
+              value={curp}
+              onChangeText={(e) => {
+                if (e != null) {
+                  if (onlyNumbers(e)) {
+                    setCurp(e);
+                  }
+                } else {
+                  setCurp("");
+                }
+              }}
+              maxLength={40}
+            />
+          </View>
+          <View style={styles.containerInput}>
+            <View>
+              <Text style={styles.text}> Carga de Saldo: </Text>
+            </View>
+            <Input
+              placeholder="Recibir/Entregar"
+              style={styles.input}
+              value={curp}
+              onChangeText={(e) => {
+                if (e != null) {
+                  if (onlyNumbers(e)) {
+                    setCurp(e);
+                  }
+                } else {
+                  setCurp("");
+                }
+              }}
+              maxLength={40}
+            />
+          </View>
+          <View style={styles.containerInput}>
+            <View>
+              <Text style={styles.text}> Valor:</Text>
+            </View>
+            <Input
+              placeholder="0.00"
+              style={styles.input}
+              value={curp}
+              onChangeText={(e) => {
+                if (e != null) {
+                  if (onlyNumbers(e)) {
+                    setCurp(e);
+                  }
+                } else {
+                  setCurp("");
+                }
+              }}
+              maxLength={40}
+            />
+          </View>
+
+          <Text h5 style={{ color: "red" }}>
+            {"\n"}
+            {text}
+          </Text>
+          <Button
+            title="APLICAR"
+            titleStyle={styles.titleButtons}
+            buttonStyle={styles.buttons}
+            onPress={() => {
+              validateCURP();
+            }}
           />
         </View>
-        <View style={styles.containerInput}>
-          <View>
-            <Text style={styles.text}> Identificación: </Text>
-          </View>
-          <Input
-            placeholder="17XXXXXXXX"
-            style={styles.input}
-            value={curp}
-            onChangeText={(e) => {
-              if (e != null) {
-                if (onlyNumbers(e)) {
-                  setCurp(e);
-                }
-              } else {
-                setCurp("");
-              }
-            }}
-            maxLength={40}
-          />
-        </View>
-        <View style={styles.containerInput}>
-          <View>
-            <Text style={styles.text}> Carga de Saldo: </Text>
-          </View>
-          <Input
-            placeholder="17XXXXXXXX"
-            style={styles.input}
-            value={curp}
-            onChangeText={(e) => {
-              if (e != null) {
-                if (onlyNumbers(e)) {
-                  setCurp(e);
-                }
-              } else {
-                setCurp("");
-              }
-            }}
-            maxLength={40}
-          />
-        </View>
-        <View style={styles.containerInput}>
-          <View>
-            <Text style={styles.text}> Valor:</Text>
-          </View>
-          <Input
-            placeholder="17XXXXXXXX"
-            style={styles.input}
-            value={curp}
-            onChangeText={(e) => {
-              if (e != null) {
-                if (onlyNumbers(e)) {
-                  setCurp(e);
-                }
-              } else {
-                setCurp("");
-              }
-            }}
-            maxLength={40}
-          />
-        </View>
-  
-        <Text h5 style={{ color: "red" }}>
-          {"\n"}
-          {text}
-        </Text>
-        <Button
-          title="APLICAR"
-          titleStyle={styles.titleButtons}
-          buttonStyle={styles.buttons}
-          onPress={() => {
-            validateCURP();
-          }}
-        />
-      </View>
       </ScrollView>
     </View>
   );
@@ -159,19 +174,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    paddingTop:30
   },
   view2: {
     flex: 2,
     alignItems: "stretch",
     justifyContent: "flex-start",
     paddingHorizontal: 30,
-    paddingTop:80
-    
-  },indicator:{
-    position:'absolute',
-    top:30, 
-    minWidth:Dimensions.get('window').width
-    },
+    paddingTop:10
+  },
+  indicator: {
+    position: "absolute",
+    top: 30,
+    minWidth: Dimensions.get("window").width,
+  },
   titleStyle: {
     color: "#FF0000",
     fontSize: 24,
