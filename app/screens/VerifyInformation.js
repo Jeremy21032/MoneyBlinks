@@ -3,7 +3,7 @@ import { StyleSheet, View, Alert, Dimensions } from "react-native";
 import { Button, Text, Input, Image } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
 import { getData } from "../services/DataTransaction";
-
+import { date } from "../Function/Date";
 export const VerifyInformation = ({ navigation }) => {
   //code: código alfanumérico de identificación que consta de 18 dígitos
   const [curp, setCurp] = React.useState(null);
@@ -14,29 +14,45 @@ export const VerifyInformation = ({ navigation }) => {
   const [carga, setCarga] = React.useState(null);
   const [valor, setValor] = React.useState(null);
   const [image, setImage] = React.useState(null);
-
+  const [codigo, setCodigo] = React.useState(null);
   const validateCURP = () => {
-    if (
-      curp != null ||
-      curp == "ABCDS" ||
-      curp == "VFSSS" ||
-      curp == "CDASF" ||
-      curp == "JML952" ||
-      curp == "DYS120"
-    ) {
-      let arreglo = getData(curp);
-      setName(arreglo[1]);
-      setId(arreglo[0]);
-      setValor(arreglo[4]);
-      setCarga(arreglo[3]);
-      setImage(arreglo[2]);
-      setShow(!show);
-      setText("");
-    } else {      
-      setText("El código es incorrecto.");
-      setShow(show);
+    let arreglo = getData(curp);
+    setName(arreglo[1]);
+    setCodigo(arreglo[5]);
+    setId(arreglo[0]);
+    setValor(arreglo[4]);
+    setCarga(arreglo[3]);
+    setImage(arreglo[2]);
+    if (curp != null && curp != " ") {
+      setShow(true);
     }
   };
+  
+  let validar = () =>{
+    let fecha= date();
+    let d= new Date()
+    let hora= d.getHours();
+    let minutos=d.getMinutes();
+
+    let horaMinutos=hora+":"+minutos;
+    let monto= parseFloat(valor)
+    let tipo;
+    if(carga == "RECIBIR DINERO"){
+      tipo="R"
+    }else if(carga == "ENTREGAR DINERO"){
+      tipo="E"
+    }
+    let arregloGlobal={
+      nombre: name,
+      id: id,
+      codigo: codigo,
+      fecha: fecha,
+      hora: horaMinutos,
+      monto: monto,
+      tipo:tipo,
+    };
+    global.transacciones.push(arregloGlobal);
+  }
   let content = (
     <View>
       <View style={{ alignItems: "center", marginVertical: 20 }}>
@@ -125,7 +141,10 @@ export const VerifyInformation = ({ navigation }) => {
           marginHorizontal: 50,
           marginVertical: 20,
         }}
-        onPress={() => {}}
+        onPress={() => {
+          validar();
+          navigation.navigate("MOV")
+        }}
       />
     </View>
   );
