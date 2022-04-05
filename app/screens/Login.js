@@ -10,10 +10,11 @@ import {
   ActivityIndicator,
 } from "react-native";import React from 'react'
 import { Button, Input } from "react-native-elements";
+import { NavigationContainer } from "@react-navigation/native";
 const image =
   "https://media.istockphoto.com/photos/person-holds-a-smartphone-with-mobile-banking-icons-projection-picture-id1304484797?b=1&k=20&m=1304484797&s=170667a&w=0&h=Z8RFNCQoyUz1lXq9eZK55DuwA8TPRcPcIAJDR7HDjpk=";
 
-export const Login = () => {
+export const Login = ({ navigation }) => {
 
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
@@ -66,6 +67,7 @@ export const Login = () => {
                   marginVertical: 50,
                 }}
                 onPress={() => {
+                  navigation.navigate("VERIFICAR");
                 }}
               />
             </View>

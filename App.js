@@ -4,6 +4,8 @@ import { StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import {Login} from './app/screens/Login'
+import {VerifyInformation} from './app/screens/VerifyInformation';
+
 const StackNav = createStackNavigator();
 
 function LoginNav() {
@@ -12,6 +14,11 @@ function LoginNav() {
       <StackNav.Screen
         name="LOGIN"
         component={Login}
+        options={{ headerShown: false }}
+      ></StackNav.Screen>
+          <StackNav.Screen
+        name="VERIFICAR"
+        component={VerifyInformation}
         options={{ headerShown: false }}
       ></StackNav.Screen>
     </StackNav.Navigator>
