@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import {Login} from './app/screens/Login'
+import {Movimientos} from './app/screens/Movimientos'
 const StackNav = createStackNavigator();
 
 function LoginNav() {
@@ -15,6 +16,8 @@ function LoginNav() {
         options={{ headerShown: false }}
       ></StackNav.Screen>
     </StackNav.Navigator>
+    
+     
   );
 }
 export default function App() {
