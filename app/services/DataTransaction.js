@@ -5,7 +5,7 @@ export const getData = (code) => {
       infoData[0] = "1714616123";
       infoData[1] = "JUAN PEREZ";
       infoData[2] =
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80";
+      "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=766&q=80";
       infoData[3] = "RECIBIR DINERO";
       infoData[4] = "50.00";
     } else if (code == "VFSSS") {

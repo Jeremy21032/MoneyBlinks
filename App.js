@@ -33,17 +33,7 @@ global.transacciones=[
 ]
 
 
-function LoginNav() {
-  return (
-    <StackNav.Navigator initialRouteName="LOGIN">
-      <StackNav.Screen
-        name="LOGIN"
-        component={Login}
-        options={{ headerShown: false }}
-      ></StackNav.Screen>
-    </StackNav.Navigator>
-  );
-}
+
 export default function App() {
   return (
     <NavigationContainer>
