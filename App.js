@@ -1,17 +1,11 @@
 import 'react-native-gesture-handler';
+
 import { StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import {Login} from './app/screens/Login'
+import {Movimientos} from './app/screens/Movimientos'
 const StackNav = createStackNavigator();
-
-
-global.transacciones=[
-	{ monto:100.0, tipo: "E", fecha: "05/04/2022", hora: "09:23", codigo:"ABCDS", nombre: "Juan Perez", id: "1714616123" },
-	{ monto:50.0, tipo: "R", fecha: "05/04/2022", hora: "12:45", codigo:"VFSSS", nombre: "Ricardo Lopez", id: "174223423" },
-	{ monto:40.0, tipo: "E", fecha: "05/04/2022", hora: "13:45", codigo:"CDASF", nombre: "Rosa Beltrán", id: "0976123123" },
-]
-
 
 function LoginNav() {
   return (
@@ -21,9 +15,24 @@ function LoginNav() {
         component={Login}
         options={{ headerShown: false }}
       ></StackNav.Screen>
+      <StackNav.Screen
+        name="MOV"
+        component={Movimientos}
+        options={{ headerShown: false }}
+      ></StackNav.Screen>
     </StackNav.Navigator>
+    
   );
 }
+
+global.transacciones=[
+	{ monto:100.0, tipo: "E", fecha: "05/04/2022", hora: "09:23", codigo:"ABCDS", nombre: "Juan Perez", id: "1714616123" },
+	{ monto:50.0, tipo: "R", fecha: "05/04/2022", hora: "12:45", codigo:"VFSSS", nombre: "Ricardo Lopez", id: "174223423" },
+	{ monto:40.0, tipo: "E", fecha: "05/04/2022", hora: "13:45", codigo:"CDASF", nombre: "Rosa Beltrán", id: "0976123123" },
+]
+
+
+
 export default function App() {
   return (
     <NavigationContainer>
