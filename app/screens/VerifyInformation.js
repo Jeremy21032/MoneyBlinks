@@ -17,42 +17,47 @@ export const VerifyInformation = ({ navigation }) => {
   const [codigo, setCodigo] = React.useState(null);
   const validateCURP = () => {
     let arreglo = getData(curp);
-    setName(arreglo[1]);
-    setCodigo(arreglo[5]);
-    setId(arreglo[0]);
-    setValor(arreglo[4]);
-    setCarga(arreglo[3]);
-    setImage(arreglo[2]);
-    if (curp != null && curp != " ") {
+    if (curp != null && curp != " " && curp == arreglo[5]) {
+      
+      setName(arreglo[1]);
+      setCodigo(arreglo[5]);
+      setId(arreglo[0]);
+      setValor(arreglo[4]);
+      setCarga(arreglo[3]);
+      setImage(arreglo[2]);
       setShow(true);
+      setText("");
+    } else {
+      setShow(false);
+      setText("El código es incorrecto.");
     }
   };
-  
-  let validar = () =>{
-    let fecha= date();
-    let d= new Date()
-    let hora= d.getHours();
-    let minutos=d.getMinutes();
 
-    let horaMinutos=hora+":"+minutos;
-    let monto= parseFloat(valor)
+  let validar = () => {
+    let fecha = date();
+    let d = new Date();
+    let hora = d.getHours();
+    let minutos = d.getMinutes();
+
+    let horaMinutos = hora + ":" + minutos;
+    let monto = parseFloat(valor);
     let tipo;
-    if(carga == "RECIBIR DINERO"){
-      tipo="R"
-    }else if(carga == "ENTREGAR DINERO"){
-      tipo="E"
+    if (carga == "RECIBIR DINERO") {
+      tipo = "R";
+    } else if (carga == "ENTREGAR DINERO") {
+      tipo = "E";
     }
-    let arregloGlobal={
+    let arregloGlobal = {
       nombre: name,
       id: id,
       codigo: codigo,
       fecha: fecha,
       hora: horaMinutos,
       monto: monto,
-      tipo:tipo,
+      tipo: tipo,
     };
     global.transacciones.push(arregloGlobal);
-  }
+  };
   let content = (
     <View>
       <View style={{ alignItems: "center", marginVertical: 20 }}>
@@ -68,67 +73,26 @@ export const VerifyInformation = ({ navigation }) => {
         <View>
           <Text style={styles.text}>Nombre: </Text>
         </View>
-        <Input
-          placeholder="nombre completo"
-          style={styles.input}
-          value={name}
-          editable={false}
-          onChangeText={(e) => {
-            setName(e);
-          }}
-          maxLength={40}
-        />
+        <Text style={styles.dato}>{name}</Text>
       </View>
       <View style={styles.containerInput}>
         <View>
-          <Text style={styles.text}> Identificación: </Text>
+          <Text style={styles.text}>Identificación: </Text>
         </View>
-        <Input
-          placeholder="17XXXXXXXX"
-          style={styles.input}
-          editable={false}
-          value={id}
-          onChangeText={(e) => {
-            setId(e);
-          }}
-          maxLength={40}
-        />
+        <Text style={styles.dato}>{id}</Text>
       </View>
       <View style={styles.containerInput}>
         <View>
-          <Text style={styles.text}> Carga de Saldo: </Text>
+          <Text style={styles.text}>Carga de Saldo: </Text>
         </View>
-        <Input
-          placeholder="Recibir/Entregar"
-          style={styles.input}
-          editable={false}
-          value={carga}
-          onChangeText={(e) => {
-            setCarga(e);
-          }}
-          maxLength={40}
-        />
+        <Text style={styles.dato}>{carga}</Text>
       </View>
       <View style={styles.containerInput}>
         <View>
-          <Text style={styles.text}> Valor:</Text>
+          <Text style={styles.text}>Valor:</Text>
         </View>
-        <Input
-          placeholder="0.00"
-          style={styles.input}
-          editable={false}
-          value={valor}
-          onChangeText={(e) => {
-            setValor(e);
-          }}
-          maxLength={40}
-        />
+        <Text style={styles.dato}> US$ {valor}</Text>
       </View>
-
-      <Text h5 style={{ color: "red" }}>
-        {"\n"}
-        {text}
-      </Text>
       <Button
         title="APLICAR"
         buttonStyle={{
@@ -148,7 +112,7 @@ export const VerifyInformation = ({ navigation }) => {
         }}
         onPress={() => {
           validar();
-          navigation.navigate("MOV")
+          navigation.navigate("MOV");
         }}
       />
     </View>
@@ -162,7 +126,7 @@ export const VerifyInformation = ({ navigation }) => {
 
       <ScrollView>
         <View style={styles.view2}>
-          <View style={styles.containerInput}>
+          <View>
             <View>
               <Text style={styles.text}> Código de Transacción: </Text>
             </View>
@@ -182,6 +146,10 @@ export const VerifyInformation = ({ navigation }) => {
               Revisa que esté correcto, puedes corregirlo si es necesario.
             </Text>
           </View>
+          <Text h5 style={{ color: "red" }}>
+            {"\n"}
+            {text}
+          </Text>
           <Button
             title="Verificar"
             buttonStyle={{
@@ -201,6 +169,7 @@ export const VerifyInformation = ({ navigation }) => {
             }}
             onPress={() => {
               validateCURP();
+              
             }}
           />
           <View>{show == true ? content : <></>}</View>
@@ -282,5 +251,15 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#0b57a5",
+    fontSize: 18,
+    fontWeight: "bold",
+    paddingBottom: 15,
+  },
+  containerInput: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  dato: {
+    fontSize: 18,
   },
 });
