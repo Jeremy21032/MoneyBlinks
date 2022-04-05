@@ -15,9 +15,13 @@ function LoginNav() {
         component={Login}
         options={{ headerShown: false }}
       ></StackNav.Screen>
+      <StackNav.Screen
+        name="Movimientos"
+        component={Movimientos}
+        options={{ headerShown: false }}
+      ></StackNav.Screen>
     </StackNav.Navigator>
     
-     
   );
 }
 export default function App() {
